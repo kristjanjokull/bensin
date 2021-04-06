@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react"
-import { Container, PriceItem, Left, Right, Title, Company, Price, Tabs, Tab } from './PriceList.styles'
+import React, { useState, useEffect } from "react";
+import Placeholder from '../Placeholder/Placeholder';
+import { Container, PriceItem, Left, Right, Title, Company, Price, Tabs, Tab } from './PriceList.styles';
 
 const PriceList = ({ data, onTabChange, onItemClick }) => {
     const [petrolIsActive, setpetrolIsActive] = useState(true);
@@ -43,6 +44,11 @@ const PriceList = ({ data, onTabChange, onItemClick }) => {
                         Dísel
                 </Tab>
             </Tabs>
+
+            {data.length === 0 && (
+                <Placeholder />
+            )}
+
             {data.map((item, indx) => (
                 <PriceItem key={item.key} onClick={() => onItemClick(item)}>
                     <Left>
