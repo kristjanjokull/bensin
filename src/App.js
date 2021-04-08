@@ -54,7 +54,7 @@ function App() {
             }
         } catch(e) {
             console.log('Error: ', e.message);
-            const errorMessage = 'Villa í vefþjónustu. Vinsamlegast reynið aftur síðar';
+            const errorMessage = 'Villa í vefþjónustu. Vinsamlegast reynið aftur síðar.';
             setErrorMessage(errorMessage);
         }
     }, []);
