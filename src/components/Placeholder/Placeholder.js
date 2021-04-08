@@ -8,7 +8,7 @@ function Placeholder() {
         <Container>
             {
                 [1,2,3,4,5].map((item, indx) => (
-                    <Item>
+                    <Item key={indx}>
                         <Skeleton height={100} />
                     </Item>
                 ))

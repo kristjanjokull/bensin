@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import PriceList from './components/priceList/PriceList';
 import DetailBox from './components/detailBox/DetailBox';
+import ErrorBox from './components/errorBox/ErrorBox';
 import { AppContainer } from './App.styles';
 
 function App() {
@@ -9,6 +10,8 @@ function App() {
     const [currencyData, setCurrencyData] = useState([]);
     const [detailBoxIsOpen, setDetailBoxIsOpen] = useState(false);
     const [activeBoxItem, setActiveBoxItem] = useState(null);
+
+    const [errorMessage, setErrorMessage] = useState("");
 
     function sortByGasolinePrice(gData) {
         const gasolineSortedList = gData.sort((a, b) => parseFloat(a.bensin95) - parseFloat(b.bensin95));
@@ -41,21 +44,25 @@ function App() {
         setActiveBoxItem(null);
     }
 
-
-    const fetchData = useCallback(async () => {
-        const result = await axios('https://apis.is/petrol');
-        setData(sortByGasolinePrice(result.data.results));
-    }, []);
-
-    const fetchCurrencyData = useCallback(async () => {
-        const result = await axios('https://apis.is/currency/lb');
-        setCurrencyData(result.data.results);
+    const fetchData = useCallback(async (url, type) => {
+        try {
+            const result = await axios(url);
+            if (type === 'gasoline') {
+                setData(sortByGasolinePrice(result.data.results));
+            } else {
+                setCurrencyData(result.data.results);
+            }
+        } catch(e) {
+            console.log('Error: ', e.message);
+            const errorMessage = 'Villa í vefþjónustu. Vinsamlegast reynið aftur síðar';
+            setErrorMessage(errorMessage);
+        }
     }, []);
 
     useEffect(() => {
-        fetchData();
-        fetchCurrencyData();
-    }, [fetchData, fetchCurrencyData]);
+        fetchData('https://apis.is/petrol', 'gasoline');
+        fetchData('https://apis.is/currency/lb', 'diesel');
+    }, [fetchData]);
 
     return (
         <AppContainer>
@@ -69,6 +76,7 @@ function App() {
                 onClose={onDetailBoxClose} 
                 currencyData={currencyData} 
             />
+            <ErrorBox message={errorMessage} onClick={() => setErrorMessage('')} />
         </AppContainer>
     );
 }
