@@ -2,9 +2,9 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { Container, Item } from './Placeholder.styles';
 
-function Placeholder() {
-    
-    return (
+
+const Placeholder: React.FC = () => {
+    return(
         <Container>
             {
                 [1,2,3,4,5].map((item, indx) => (
@@ -14,7 +14,7 @@ function Placeholder() {
                 ))
             }
         </Container>
-    );
+    )
 }
 
-export default Placeholder;
+export default Placeholder

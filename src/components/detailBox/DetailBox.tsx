@@ -1,10 +1,24 @@
-import React from "react";
-import CanselIcon from '../../images/cancel.svg';
-import Table from '../table/Table';
-import { Container, Icon, InfoContainer, TableContainer, Title, Company } from './Detailbox.styles';
+import React from 'react'
+import CanselIcon from '../../images/cancel.svg'
+import Table from '../table/Table'
+import { Container, Icon, InfoContainer, TableContainer, Title, Company } from './DetailBox.styles'
 
-const DetailBox = ({ isOpen, item, onClose, currencyData }) => {
-    return (
+interface Item {
+    name: string,
+    company: string,
+    bensin95: string,
+    diesel: string
+}
+
+interface Props {
+    isOpen: boolean,
+    item: Item | null,
+    onClose: () => void,
+    currencyData: Array<any>
+}
+
+const DetailBox: React.FC<Props> = ({ isOpen, item, onClose, currencyData}) => {
+    return(
         <Container isOpen={isOpen}>
             <Icon src={CanselIcon} onClick={onClose} />
             {item && (
@@ -21,4 +35,4 @@ const DetailBox = ({ isOpen, item, onClose, currencyData }) => {
     )
 }
 
-export default DetailBox;
+export default DetailBox

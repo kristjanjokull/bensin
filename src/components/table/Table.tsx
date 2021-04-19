@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import ISIcon from '../../images/iceland.svg';
 import DKIcon from '../../images/denmark.svg';
 import SEIcon from '../../images/sweden.svg';
@@ -7,7 +7,22 @@ import USAIcon from '../../images/united-states.svg';
 import UKIcon from '../../images/united-kingdom.svg';
 import { PriceTable, TableHead, TableBody, TableRow, TableHeader, TableData, Flag } from './Table.styles'
 
-const Table = ({ type, title, item, currencyData }) => {
+interface Item {
+    name: string,
+    company: string,
+    bensin95: string,
+    diesel: string
+}
+
+interface Props {
+    type: string,
+    title: string,
+    item: Item,
+    currencyData: Array<any>
+}
+
+
+const Table: React.FC<Props> = ( { type, title, item, currencyData }) => {
 
     function perfromCurrencyCalculation(type, item, currencyData, selectedCurrency){
         const iskPrice = type === 'gasoline' ? item.bensin95: item.diesel;
@@ -23,7 +38,7 @@ const Table = ({ type, title, item, currencyData }) => {
         return roundedNumber;
     }
 
-    return (
+    return(
         <PriceTable>
             <TableHead>
                 <TableRow>
@@ -75,4 +90,4 @@ const Table = ({ type, title, item, currencyData }) => {
     )
 }
 
-export default Table;
+export default Table

@@ -1,8 +1,16 @@
-import React, { useState, useEffect } from "react";
-import Placeholder from '../Placeholder/Placeholder';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react'
+import Placeholder from '../placeHolder/Placeholder';
 import { Container, PriceItem, Left, Right, Title, Company, Price, Tabs, Tab } from './PriceList.styles';
 
-const PriceList = ({ data, onTabChange, onItemClick }) => {
+interface Props {
+    data: any,
+    onTabChange: (petrolType: string, data: object) => void,
+    onItemClick: (item: object) => void
+}
+
+const PriceList: React.FC<Props> = ( { data, onTabChange, onItemClick }) => {
+
     const [petrolIsActive, setpetrolIsActive] = useState(true);
     const [isSticky, setSticky] = useState(false)
 
@@ -69,4 +77,4 @@ const PriceList = ({ data, onTabChange, onItemClick }) => {
     )
 }
 
-export default PriceList;
+export default PriceList

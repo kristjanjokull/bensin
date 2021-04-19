@@ -1,15 +1,23 @@
-import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
-import PriceList from './components/priceList/PriceList';
-import DetailBox from './components/detailBox/DetailBox';
-import ErrorBox from './components/errorBox/ErrorBox';
+import React, { useEffect, useState, useCallback } from 'react'
+import PriceList from './components/priceList/Pricelist'
+import DetailBox from './components/detailBox/DetailBox'
+import ErrorBox from './components/errorBox/ErrorBox'
 import { AppContainer } from './App.styles';
 
-function App() {
+interface Item {
+    name: string,
+    company: string,
+    bensin95: string,
+    diesel: string
+}
+
+const App: React.FC = () => {
+
     const [data, setData] = useState([]);
     const [currencyData, setCurrencyData] = useState([]);
     const [detailBoxIsOpen, setDetailBoxIsOpen] = useState(false);
-    const [activeBoxItem, setActiveBoxItem] = useState(null);
+    const [activeBoxItem, setActiveBoxItem] = useState<Item | null>(null);
 
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -25,7 +33,7 @@ function App() {
 
     function onTabChange(tab, items) {
         setData([]);
-        let updatedList = null;
+        let updatedList = [];
         if (tab === 'disel') {
             updatedList = sortByDiselPrice(items);
         } else {
@@ -78,7 +86,7 @@ function App() {
             />
             <ErrorBox message={errorMessage} onClick={() => setErrorMessage('')} />
         </AppContainer>
-    );
+    )
 }
 
-export default App;
+export default App

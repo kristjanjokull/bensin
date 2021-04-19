@@ -1,8 +1,14 @@
-import React from "react";
-import CanselIcon from '../../images/cancel.svg';
-import { Container, Info, Title, Text, Icon } from './ErrorBox.styles';
+import React from 'react'
+import CanselIcon from '../../images/cancel.svg'
+import { Container, Info, Title, Text, Icon } from './ErrorBox.styles'
 
-const ErrorBox = ({ message, onClick }) => {
+interface Props {
+    message: string
+    onClick: (item: object) => void
+}
+
+
+const ErrorBox: React.FC<Props> = ( { message, onClick}) => {
     if (message !== "") {
         return (
             <Container>
@@ -17,4 +23,4 @@ const ErrorBox = ({ message, onClick }) => {
     return null;
 }
 
-export default ErrorBox;
+export default ErrorBox
