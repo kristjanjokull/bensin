@@ -10,11 +10,20 @@ interface Item {
     diesel: string
 }
 
+interface CurrencyItem {
+    askValue: number,
+    bidValue: number,
+    changeCur: number,
+    longName: string,
+    shortName: string,
+    value: number
+}
+
 interface Props {
     isOpen: boolean,
     item: Item | null,
     onClose: () => void,
-    currencyData: Array<any>
+    currencyData: Array<CurrencyItem>
 }
 
 const DetailBox: React.FC<Props> = ({ isOpen, item, onClose, currencyData}) => {

@@ -14,6 +14,15 @@ interface Item {
     diesel: string
 }
 
+interface CurrencyItem {
+    askValue: number,
+    bidValue: number,
+    changeCur: number,
+    longName: string,
+    shortName: string,
+    value: number
+}
+
 interface Props {
     type: string,
     title: string,
@@ -24,25 +33,27 @@ interface Props {
 
 const Table: React.FC<Props> = ( { type, title, item, currencyData }) => {
 
-    function perfromCurrencyCalculation(type, item, currencyData, selectedCurrency){
-        const iskPrice = type === 'gasoline' ? item.bensin95: item.diesel;
+    function perfromCurrencyCalculation(type: string, item: Item, currencyData: Array<CurrencyItem>, selectedCurrency: string): string {
+        const iskPrice = (type === 'gasoline') ? item.bensin95: item.diesel;
 
         const calcObject = currencyData.find(obj => {
             return obj.shortName === selectedCurrency
         });
 
-        const calcPrice = iskPrice / calcObject.askValue;
-
-        const roundedNumber = calcPrice.toFixed(2);
-
-        return roundedNumber;
+        if (calcObject) {
+            const askValue = calcObject.askValue;
+            const calcPrice = parseFloat(iskPrice) / askValue;
+            const roundedNumber = calcPrice.toFixed(2);
+            return roundedNumber;
+        }
+        return "0";
     }
 
     return(
         <PriceTable>
             <TableHead>
                 <TableRow>
-                    <TableHeader colSpan="2">{title} (verð/l)</TableHeader>
+                    <TableHeader colSpan={2}>{title} (verð/l)</TableHeader>
                 </TableRow>
             </TableHead>
             <TableBody>

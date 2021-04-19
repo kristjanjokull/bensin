@@ -3,10 +3,18 @@ import React, { useState, useEffect } from 'react'
 import Placeholder from '../placeHolder/Placeholder';
 import { Container, PriceItem, Left, Right, Title, Company, Price, Tabs, Tab } from './PriceList.styles';
 
+interface Item {
+    name: string,
+    company: string,
+    bensin95: string,
+    diesel: string,
+    key: string
+}
+
 interface Props {
-    data: any,
-    onTabChange: (petrolType: string, data: object) => void,
-    onItemClick: (item: object) => void
+    data: Array<Item>,
+    onTabChange: (petrolType: string, data: Array<Item>) => void,
+    onItemClick: (item: Item) => void
 }
 
 const PriceList: React.FC<Props> = ( { data, onTabChange, onItemClick }) => {
@@ -14,7 +22,7 @@ const PriceList: React.FC<Props> = ( { data, onTabChange, onItemClick }) => {
     const [petrolIsActive, setpetrolIsActive] = useState(true);
     const [isSticky, setSticky] = useState(false)
 
-    const changeTab = (tabItem) => {
+    const changeTab = (tabItem: string) => {
         if(tabItem === 'gasoline' && !petrolIsActive) {
             setpetrolIsActive(!petrolIsActive);
             onTabChange('gasoline', data);
@@ -57,7 +65,7 @@ const PriceList: React.FC<Props> = ( { data, onTabChange, onItemClick }) => {
                 <Placeholder />
             )}
 
-            {data.map((item, indx) => (
+            {data.map((item, indx: number) => (
                 <PriceItem key={item.key} onClick={() => onItemClick(item)}>
                     <Left>
                         <Title>{indx+1}. {item.name}</Title>

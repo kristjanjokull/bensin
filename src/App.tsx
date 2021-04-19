@@ -9,29 +9,30 @@ interface Item {
     name: string,
     company: string,
     bensin95: string,
-    diesel: string
+    diesel: string,
+    key: string
 }
 
 const App: React.FC = () => {
 
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<Array<Item>>([]);
     const [currencyData, setCurrencyData] = useState([]);
     const [detailBoxIsOpen, setDetailBoxIsOpen] = useState(false);
     const [activeBoxItem, setActiveBoxItem] = useState<Item | null>(null);
 
     const [errorMessage, setErrorMessage] = useState("");
 
-    function sortByGasolinePrice(gData) {
+    function sortByGasolinePrice(gData: Array<Item>) {
         const gasolineSortedList = gData.sort((a, b) => parseFloat(a.bensin95) - parseFloat(b.bensin95));
         return gasolineSortedList;
     }
 
-    function sortByDiselPrice(dData) {
+    function sortByDiselPrice(dData: Array<Item>) {
         const dieselSortedList = dData.sort((a, b) => parseFloat(a.diesel) - parseFloat(b.diesel));
         return dieselSortedList;
     }
 
-    function onTabChange(tab, items) {
+    function onTabChange(tab : string, items: Array<Item>) {
         setData([]);
         let updatedList = [];
         if (tab === 'disel') {
@@ -42,7 +43,7 @@ const App: React.FC = () => {
         setData(updatedList);
     }
 
-    function onItemClick(item){
+    function onItemClick(item: Item){
         setDetailBoxIsOpen(true);
         setActiveBoxItem(item);
     }

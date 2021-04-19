@@ -1,6 +1,10 @@
 import styled from "styled-components"
 
-export const Container = styled.div`
+type ContainerProps = {
+    isOpen: boolean
+}
+
+export const Container = styled.div<ContainerProps>`
     width: 100%;
     height: 100vh;
     background-color: white;

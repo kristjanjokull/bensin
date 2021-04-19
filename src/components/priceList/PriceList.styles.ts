@@ -1,5 +1,13 @@
 import styled from "styled-components"
 
+type TabsProps = {
+    sticky: boolean
+}
+
+type TabProps = {
+    isActive: boolean
+}
+
 export const Container = styled.div`
     max-width: 600px;
     margin: 2rem auto;
@@ -33,7 +41,7 @@ export const Price = styled.p`
     font-size: 1.2rem;
 `;
 
-export const Tabs = styled.ul`
+export const Tabs = styled.ul<TabsProps>`
     text-align: center;
     margin-bottom: 2rem !important;
     transition: all 0.3s ease-in-out;
@@ -47,7 +55,7 @@ export const Tabs = styled.ul`
     `}
 `;
 
-export const Tab = styled.li`
+export const Tab = styled.li<TabProps>`
     display: inline-block;
     color: #666;
     padding: 0.5rem 1rem;
