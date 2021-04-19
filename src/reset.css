@@ -68,9 +68,10 @@ select {
 ul {
 	margin: 0;
 	padding: 0;
-	li {
-		list-style-type: none;
-	}
+}
+
+ul li {
+	list-style-type: none;
 }
 
 /* FONTS */
