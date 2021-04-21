@@ -2,12 +2,14 @@ import styled from "styled-components"
 
 type ContainerProps = {
     isOpen: boolean
+    darkModeEnabled: boolean
 }
 
 export const Container = styled.div<ContainerProps>`
     width: 100%;
     height: 100vh;
-    background-color: white;
+    background-color: ${props => (props.darkModeEnabled ? "black" : "white")};
+    color: ${props => (props.darkModeEnabled ? "white" : "black")};
     position: fixed;
     top: 0;
     left: 0;

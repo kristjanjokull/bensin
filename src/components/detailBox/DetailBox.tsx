@@ -1,6 +1,8 @@
 import React from 'react'
 import CanselIcon from '../../images/cancel.svg'
 import Table from '../table/Table'
+import { useRecoilValue } from 'recoil';
+import { darkModeState } from '../../stateManager/globalState';
 import { Container, Icon, InfoContainer, TableContainer, Title, Company } from './DetailBox.styles'
 
 interface Item {
@@ -27,8 +29,9 @@ interface Props {
 }
 
 const DetailBox: React.FC<Props> = ({ isOpen, item, onClose, currencyData}) => {
+    const darkMode = useRecoilValue(darkModeState);
     return(
-        <Container isOpen={isOpen}>
+        <Container isOpen={isOpen} darkModeEnabled={darkMode}>
             <Icon src={CanselIcon} onClick={onClose} />
             {item && (
                 <InfoContainer>
