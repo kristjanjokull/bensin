@@ -23,8 +23,8 @@ export const Icon = styled.img`
     height: 1.2rem;
     cursor: pointer;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 40px;
+    left: 40px;
 `;
 
 export const InfoContainer = styled.div`
