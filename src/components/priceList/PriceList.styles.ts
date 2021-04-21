@@ -8,19 +8,24 @@ type TabProps = {
     isActive: boolean
 }
 
+type PriceItemProps = {
+    darkModeEnabled: boolean
+}
+
 export const Container = styled.div`
     max-width: 600px;
-    margin: 2rem auto;
+    margin: 0rem auto;
+    padding-top: 2rem;
 `;
 
-export const PriceItem = styled.div`
+export const PriceItem = styled.div<PriceItemProps>`
     box-shadow: 0 0px 21px 0 #e5eaee;
     padding: 2rem;
     margin-bottom: 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: white;
+    background-color: ${props => (props.darkModeEnabled ? "black" : "white")};
     cursor: pointer;
     transition: box-shadow 0.3s ease-in;
     &:hover {

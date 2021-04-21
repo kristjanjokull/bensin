@@ -3,7 +3,10 @@ import React, { useEffect, useState, useCallback } from 'react'
 import PriceList from './components/priceList/Pricelist'
 import DetailBox from './components/detailBox/DetailBox'
 import ErrorBox from './components/errorBox/ErrorBox'
+import DarkMode from './components/settings/darkMode'
 import { AppContainer } from './App.styles';
+import { useRecoilValue } from 'recoil';
+import { darkModeState } from './stateManager/globalState';
 
 interface Item {
     name: string,
@@ -19,6 +22,10 @@ const App: React.FC = () => {
     const [currencyData, setCurrencyData] = useState([]);
     const [detailBoxIsOpen, setDetailBoxIsOpen] = useState(false);
     const [activeBoxItem, setActiveBoxItem] = useState<Item | null>(null);
+
+    // Global state
+    const darkMode = useRecoilValue(darkModeState);
+    console.log("Darkmode: ", darkMode);
 
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -74,7 +81,8 @@ const App: React.FC = () => {
     }, [fetchData]);
 
     return (
-        <AppContainer>
+        <AppContainer darkModeEnabled={darkMode}>
+            <DarkMode />
             <PriceList 
                 data={data} onTabChange={(a, b) => onTabChange(a,b)} 
                 onItemClick={(item) => onItemClick(item)}

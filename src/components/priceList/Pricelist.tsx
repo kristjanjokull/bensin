@@ -66,7 +66,11 @@ const PriceList: React.FC<Props> = ( { data, onTabChange, onItemClick }) => {
             )}
 
             {data.map((item, indx: number) => (
-                <PriceItem key={item.key} onClick={() => onItemClick(item)}>
+                <PriceItem 
+                    key={item.key} 
+                    onClick={() => onItemClick(item)}
+                    darkModeEnabled={false}
+                >
                     <Left>
                         <Title>{indx+1}. {item.name}</Title>
                         <Company>{item.company}</Company>
