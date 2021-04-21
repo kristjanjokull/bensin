@@ -57,3 +57,7 @@ export const Slider = styled.div<SliderProps>`
     }
 `;
 
+export const Icon = styled.img`
+    height: 25px;
+`;
+

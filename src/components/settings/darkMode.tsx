@@ -1,6 +1,7 @@
 import React from 'react';
-import { Container, SwitchWrapper, ThemeSwitch, Input, Slider } from './darkMode.styles';
+import { Container, SwitchWrapper, ThemeSwitch, Input, Slider, Icon } from './darkMode.styles';
 import { useRecoilState } from 'recoil';
+import Moon from '../../images/moon.svg';
 import { darkModeState } from '../../stateManager/globalState';
 
 
@@ -17,7 +18,7 @@ const DarkMode: React.FC = () => {
                         onClick={() => setDarkMode(!darkMode)} 
                         darkModeEnabled={darkMode}></Slider>
                 </ThemeSwitch>
-                <em>Enable Dark Mode!</em>
+                <em><Icon src={Moon} alt="UK" /></em>
             </SwitchWrapper>
         </Container>
     )
