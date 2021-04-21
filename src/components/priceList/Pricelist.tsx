@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import Placeholder from '../placeHolder/Placeholder';
+import { useRecoilValue } from 'recoil';
+import { darkModeState } from '../../stateManager/globalState';
 import { Container, PriceItem, Left, Right, Title, Company, Price, Tabs, Tab } from './PriceList.styles';
 
 interface Item {
@@ -21,6 +23,7 @@ const PriceList: React.FC<Props> = ( { data, onTabChange, onItemClick }) => {
 
     const [petrolIsActive, setpetrolIsActive] = useState(true);
     const [isSticky, setSticky] = useState(false)
+    const darkMode = useRecoilValue(darkModeState);
 
     const changeTab = (tabItem: string) => {
         if(tabItem === 'gasoline' && !petrolIsActive) {
@@ -48,7 +51,7 @@ const PriceList: React.FC<Props> = ( { data, onTabChange, onItemClick }) => {
 
     return (
         <Container>
-            <Tabs sticky={isSticky}>
+            <Tabs sticky={isSticky} darkModeEnabled={darkMode}>
                 <Tab 
                     onClick={() => changeTab('gasoline')} 
                     isActive={petrolIsActive}>
@@ -69,7 +72,7 @@ const PriceList: React.FC<Props> = ( { data, onTabChange, onItemClick }) => {
                 <PriceItem 
                     key={item.key} 
                     onClick={() => onItemClick(item)}
-                    darkModeEnabled={false}
+                    darkModeEnabled={darkMode}
                 >
                     <Left>
                         <Title>{indx+1}. {item.name}</Title>
@@ -77,10 +80,10 @@ const PriceList: React.FC<Props> = ( { data, onTabChange, onItemClick }) => {
                     </Left>
                     <Right>
                         {petrolIsActive && (
-                            <Price>{item.bensin95} kr/l</Price>
+                            <Price darkModeEnabled={darkMode}>{item.bensin95} kr/l</Price>
                         )}
                         {!petrolIsActive && (
-                            <Price>{item.diesel} kr/l</Price>
+                            <Price darkModeEnabled={darkMode}>{item.diesel} kr/l</Price>
                         )}
                     </Right>
                 </PriceItem>

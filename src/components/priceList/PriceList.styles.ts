@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 type TabsProps = {
     sticky: boolean
+    darkModeEnabled: boolean
 }
 
 type TabProps = {
@@ -12,6 +13,10 @@ type PriceItemProps = {
     darkModeEnabled: boolean
 }
 
+type PriceProps = {
+    darkModeEnabled: boolean
+}
+
 export const Container = styled.div`
     max-width: 600px;
     margin: 0rem auto;
@@ -19,18 +24,28 @@ export const Container = styled.div`
 `;
 
 export const PriceItem = styled.div<PriceItemProps>`
-    box-shadow: 0 0px 21px 0 #e5eaee;
+    ${props => !props.darkModeEnabled && `
+        box-shadow: 0 0px 21px 0 #e5eaee;  
+    `}
+
+    ${props => props.darkModeEnabled && `
+        color: #666; 
+    `}
+
     padding: 2rem;
     margin-bottom: 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: ${props => (props.darkModeEnabled ? "black" : "white")};
+    background-color: ${props => (props.darkModeEnabled ? "#1a1a1b" : "white")};
     cursor: pointer;
     transition: box-shadow 0.3s ease-in;
-    &:hover {
-        box-shadow: 0 0px 11px 0 #e5eaee;
-    }
+
+    ${props => !props.darkModeEnabled && `
+        &:hover {
+            box-shadow: 0 0px 11px 0 #e5eaee;
+        }
+    `}
 `;
 
 export const Left = styled.div``;
@@ -41,8 +56,8 @@ export const Company = styled.h4`
     color: #666;
 `;
 
-export const Price = styled.p`
-    color: #008dc6;
+export const Price = styled.p<PriceProps>`
+    color: ${props => (props.darkModeEnabled ? "#666" : "#008dc6")};
     font-size: 1.2rem;
 `;
 
@@ -55,9 +70,11 @@ export const Tabs = styled.ul<TabsProps>`
         top: 0;
         left: 0;
         width: 100%;
-        background-color: white;
         padding: 1rem 0 !important;
     `}
+
+    background-color: ${props => (props.darkModeEnabled ? "black" : "white")};
+
 `;
 
 export const Tab = styled.li<TabProps>`
