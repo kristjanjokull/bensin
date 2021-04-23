@@ -2,7 +2,7 @@ import React from 'react'
 import CanselIcon from '../../images/cancel.svg'
 import Table from '../table/Table'
 import { useRecoilValue } from 'recoil';
-import { darkModeState } from '../../stateManager/globalState';
+import { darkModeState } from '../../stateManager/atoms';
 import { Container, Icon, InfoContainer, TableContainer, Title, Company } from './DetailBox.styles'
 
 interface Item {

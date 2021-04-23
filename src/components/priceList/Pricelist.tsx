@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import Placeholder from '../placeHolder/Placeholder';
 import { useRecoilValue } from 'recoil';
-import { darkModeState } from '../../stateManager/globalState';
+import { darkModeState } from '../../stateManager/atoms';
 import { Container, PriceItem, Left, Right, Title, Company, Price, Tabs, Tab } from './PriceList.styles';
 
 interface Item {

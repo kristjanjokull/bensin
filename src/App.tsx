@@ -6,7 +6,7 @@ import ErrorBox from './components/errorBox/ErrorBox'
 import DarkMode from './components/settings/darkMode'
 import { AppContainer } from './App.styles';
 import { useRecoilValue } from 'recoil';
-import { darkModeState } from './stateManager/globalState';
+import { darkModeState } from './stateManager/atoms';
 
 interface Item {
     name: string,
@@ -25,7 +25,6 @@ const App: React.FC = () => {
 
     // Global state
     const darkMode = useRecoilValue(darkModeState);
-    console.log("Darkmode: ", darkMode);
 
     const [errorMessage, setErrorMessage] = useState("");
 

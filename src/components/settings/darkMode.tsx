@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, SwitchWrapper, ThemeSwitch, Input, Slider, Icon } from './darkMode.styles';
 import { useRecoilState } from 'recoil';
 import Moon from '../../images/moon.svg';
-import { darkModeState } from '../../stateManager/globalState';
+import { darkModeState } from '../../stateManager/atoms';
 
 
 const DarkMode: React.FC = () => {
